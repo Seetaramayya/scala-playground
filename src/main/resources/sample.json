@@ -1,0 +1,10 @@
+{
+  "name" : "Seeta (Ramayya) Vadali",
+  "address" : {
+    "street" : "Franklinstraat",
+    "house_number" : 1009,
+    "city" : "Hilversum"
+  },
+
+  "salary" : 6218.32
+}
