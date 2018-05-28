@@ -1,4 +1,4 @@
-#HackerRank Algorithms
+# HackerRank Algorithms
 
 My idea is to solve all the challenges over [here](https://www.hackerrank.com/domains/algorithms/warmup)
 

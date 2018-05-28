@@ -5,7 +5,7 @@ in few classes, in such situation I created another project.
 
 I am documenting everything here for my future references. This is my navigation page
 
-###My experiments
+### My experiments
 
 - Cats learning started but later moved cats work to different project. Here is [scala-with-cats](https://github.com/Seetaramayya/scala-with-cats)
 - Scala 99 problems project is [here](https://github.com/Seetaramayya/99ScalaProblems) 
