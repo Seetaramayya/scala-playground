@@ -1,5 +1,6 @@
 package com.seeta.amazon
 
+import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
 
 /**
@@ -11,7 +12,7 @@ object StairsChallenge {
   type Ways = Int
 
   def numberOfWaysWithState(goal: Int)(implicit steps: Set[Step]): Int = {
-    var waysByPosition = ArrayBuffer(1)
+    val waysByPosition = ArrayBuffer(1)
     (1 to goal).foreach { currentStep =>
       val allowedSubSteps = steps.map(currentStep - _).filter(_ >= 0)
       waysByPosition += allowedSubSteps.toList.map(step => waysByPosition(step)).sum
@@ -20,6 +21,7 @@ object StairsChallenge {
   }
 
   def numberOfWaysRecursive(goal: Int)(implicit steps: Set[Step]): Ways = {
+    @tailrec
     def loop(waysByPosition: ArrayBuffer[Ways], position: Step): Ways = {
       if (position > goal) {
         waysByPosition.last

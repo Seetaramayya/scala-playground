@@ -74,6 +74,11 @@ class StairsChallengeSpec extends WordSpec with Matchers {
       println(s"total time taken for $goal is ${LocalDateTime.now().until(start, ChronoUnit.MILLIS).abs} ms")
     }
 
+    "return number of ways for (3, 7, 13) steps" in {
+      implicit val steps: Set[Int] = Set(3, 7, 13)
+      numberOfWays(250) shouldBe 1128847607
+    }
+
     "return number of ways for (10, 20) steps" in {
       implicit val steps: Set[Int] = Set(10, 20)
       numberOfWays(0) shouldBe 1
