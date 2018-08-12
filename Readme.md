@@ -14,5 +14,6 @@ I am documenting everything here for my future references. This is my navigation
 - JSON Web signature
 - Parser and combinator
 - Running __Java JUnit Tests__ along with __Scala Tests__. [Junit Interface](https://github.com/sbt/junit-interface) is 
-used to run java junit tests 
+used to run java junit tests
+- Akka playground repository is [here](https://github.com/Seetaramayya/akka-examples)
 
