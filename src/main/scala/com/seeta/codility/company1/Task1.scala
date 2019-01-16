@@ -9,6 +9,7 @@ package com.seeta.codility.company1
 object Task1 {
   def solution(s: String): Int = {
     val sentences = s.split("\\.|\\?|\\!")
-    sentences.map(sentence => sentence.split("\\s").count(_.length > 0)).max
+    val wordsInSentences = sentences.map(sentence => sentence.split("\\s+").count(_.length > 0))
+    if (wordsInSentences.isEmpty) 0 else wordsInSentences.max
   }
 }

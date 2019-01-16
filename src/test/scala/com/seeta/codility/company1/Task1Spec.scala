@@ -15,6 +15,7 @@ class Task1Spec extends WordSpec with Matchers {
       Task1.solution("fdsdfsdfdsf erfdsfgh. sarfasfdsf?") shouldBe 2
       Task1.solution("") shouldBe 0
       Task1.solution(" 1 ") shouldBe 1
+      Task1.solution("      ") shouldBe 0
     }
   }
 }
