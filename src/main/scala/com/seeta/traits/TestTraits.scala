@@ -2,6 +2,7 @@ package com.seeta.traits
 
 // Base -> AnyRef -> Any
 class Base
+class DirectSubBase extends Base
 
 // A -> Base
 trait A extends Base {
