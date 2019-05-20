@@ -11,6 +11,7 @@ val catsCore = "1.0.0"
 val awsSdkVersion = "1.11.483"
 val logbackVersion = "1.2.3"
 val commonsIo = "2.6"
+val gauvaVersoin = "27.1-jre"
 
 libraryDependencies ++= Seq (
   "org.bouncycastle"       %  "bcprov-jdk15on"            % "1.54",
@@ -22,6 +23,7 @@ libraryDependencies ++= Seq (
   "com.amazonaws"          %  "aws-java-sdk-s3"           % awsSdkVersion,
   "ch.qos.logback"         %  "logback-classic"           % logbackVersion,
   "commons-io"             %  "commons-io"                % commonsIo,
+  "com.google.guava"       %  "guava"                     % gauvaVersoin,
   "com.novocode"           %  "junit-interface"           % "0.11"          % Test,
   "junit"                  %  "junit"                     % "4.12"          % Test,
   "org.scalatest"          %% "scalatest"                 % "3.0.1"         % Test
