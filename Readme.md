@@ -17,3 +17,4 @@ I am documenting everything here for my future references. This is my navigation
 used to run java junit tests
 - Akka playground repository is [here](https://github.com/Seetaramayya/akka-examples)
 - AWS java SDK are in __com.seeta.aws__ package
+- [Functional Programming in Scala](http://manning.com/bjarnason/) exercises are [here](https://github.com/Seetaramayya/functional-programming-in-scala)

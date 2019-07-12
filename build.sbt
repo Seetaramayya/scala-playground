@@ -24,5 +24,6 @@ libraryDependencies ++= Seq (
   "commons-io"             %  "commons-io"                % commonsIo,
   "com.novocode"           %  "junit-interface"           % "0.11"          % Test,
   "junit"                  %  "junit"                     % "4.12"          % Test,
-  "org.scalatest"          %% "scalatest"                 % "3.0.1"         % Test
+  "org.scalatest"          %% "scalatest"                 % "3.0.1"         % Test,
+  "org.scalacheck"         %% "scalacheck"                % "1.13.+"
 )
