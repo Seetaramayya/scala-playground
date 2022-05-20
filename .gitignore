@@ -6,6 +6,7 @@
 target/
 *.log
 
+!seeta
 
 #My style which I do not want to commit
 *.bkp
