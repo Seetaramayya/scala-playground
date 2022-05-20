@@ -52,6 +52,6 @@ object CountNumberOfTexts {
   // 22233
   // 2233
   //
-  def splitBySame(input: String): Seq[String] = ???
-  def countTexts(pressedKeys: String): Int = ???
+  def splitBySame(input: String): Seq[String] = ??? // TODO: implement
+  def countTexts(pressedKeys: String): Int = ??? // TODO: implement
 }
