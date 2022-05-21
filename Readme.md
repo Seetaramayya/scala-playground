@@ -18,6 +18,7 @@ used to run java junit tests
 - Akka playground repository is [here](https://github.com/Seetaramayya/akka-examples)
 - AWS java SDK are in __com.seeta.aws__ package
 - [Functional Programming in Scala](http://manning.com/bjarnason/) exercises are [here](https://github.com/Seetaramayya/functional-programming-in-scala)
+- Added [graph](src/main/scala/com/seeta/graphs) traversals (dfs, bfs), there are still some `TODO`s.
 
 
 ### Graph Representation
