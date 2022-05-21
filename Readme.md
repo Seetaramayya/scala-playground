@@ -18,3 +18,20 @@ used to run java junit tests
 - Akka playground repository is [here](https://github.com/Seetaramayya/akka-examples)
 - AWS java SDK are in __com.seeta.aws__ package
 - [Functional Programming in Scala](http://manning.com/bjarnason/) exercises are [here](https://github.com/Seetaramayya/functional-programming-in-scala)
+
+
+### Graph Representation
+
+```mermaid
+graph TD;5-->3;
+5-->1;
+1-->5;
+1-->2;
+2-->4;
+2-->1;
+7-->3;
+3-->7;
+3-->5;
+4-->2;
+```
+
