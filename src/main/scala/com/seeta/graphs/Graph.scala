@@ -3,14 +3,124 @@ package com.seeta.graphs
 import scala.annotation.tailrec
 import scala.collection.immutable.Queue
 
+trait Graph[T] {
+  def graph: Map[T, Seq[T]]
+  def bfs(start: T): Seq[T]
+  def dfs(start: T): Seq[T]
+  def isCyclic: Boolean
+  def isConnected(src: T, des: T): Boolean
+}
+
 // TODO: Think about true representation of the Graph.
 // Map of value -> edges are correct, can we bring type safety in any way?
-case class Graph[T](private val graph: Map[T, Seq[T]]) {
+class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
   def getEdges(key: T): Seq[T] = graph.getOrElse(key, Seq.empty[T])
+
+  private lazy val keys = graph.keys
+  private lazy val start: T = graph.head._1
 
   override def toString: String = graph.map {
     case (key, values) => s"$key --> ${values.mkString(",")}"
   }.mkString("\n")
+
+  def isCyclic(maybeStart: Option[T] = graph.headOption.map(_._1)): Boolean = {
+    @tailrec
+    def loop(stack: Seq[T], visited: Set[T], result: Boolean): Boolean = {
+      if(stack.isEmpty || result) result
+      else {
+        val current = stack.head
+        val neighbours = getEdges(current)
+        val alreadyVisited = neighbours.toSet.intersect(visited)
+        loop(neighbours ++ stack.tail, visited + current, result = alreadyVisited.nonEmpty)
+      }
+    }
+
+    maybeStart match {
+      case Some(start) if graph.keys.exists(_ == start) => loop(Seq(start), Set(), result = false)
+      case _ if graph.nonEmpty => loop(Seq(start), Set(), result = false)
+      case _ => false
+    }
+  }
+
+  private def contains(key: T): Boolean = keys.exists(_ == key)
+
+  def isConnected(src: T, des: T): Boolean = {
+    @tailrec
+    def loop(stack: Seq[T], visited: Seq[T], hasPath: Boolean): Boolean = {
+      if (hasPath) hasPath
+      else if (stack.isEmpty) false
+      else {
+        val current = stack.head
+        val newVisited = if (visited.contains(current)) visited else current +: visited
+        val neighboursToVisit = getEdges(current).filterNot(newVisited.contains)
+        loop(neighboursToVisit ++ stack.tail, newVisited, current == des)
+      }
+    }
+
+
+    if (!contains(src) || !contains(des)) false else loop(Seq(src), Seq(), hasPath = false)
+  }
+
+  /**
+   * Depth first search traversal is based on stack representation. In the other words,
+   *
+   *  - Add initial element to the stack
+   *  - Pop the element from the stack
+   *     - add element to traversed elements
+   *     - if the element has edges push to the stack
+   *  - repeat step2 until stack is empty
+   *
+   * Recursive calls are also implemented via stack so it is easy to implement with recursion. It is perfectly legal to
+   * use stack kind of data structure.
+   * @return the sequence of elements that are traversed in the order
+   */
+  def dfs(start: T): Seq[T] = {
+    // scala vector or list works like a stack, last in first out. (or) prepends new element
+    @tailrec
+    def loop(stack: Seq[T], traversed: Seq[T]): Seq[T] = {
+      if (stack.isEmpty) traversed.reverse
+      else {
+        val current = stack.head
+        val neighbours = getEdges(current)
+        val visited = if(traversed.contains(current)) traversed else current +: traversed
+        val toBeVisited = neighbours.filterNot(visited.contains)
+        loop(toBeVisited ++ stack.tail, visited)
+      }
+    }
+
+    loop(Vector(start), Vector())
+  }
+
+  /**
+   * Breadth first search traversal is based on queue representation. In the other words,
+   *
+   *  - Add initial element to the queue
+   *  - take head element from the queue
+   *     - add element to traversed elements
+   *     - if the element has edges then append them the queue
+   *  - repeat step2 until queue is empty
+   *
+   * @return the sequence of elements that are traversed in the order
+   */
+  def bfs(start: T): Seq[T] = {
+    @tailrec
+    def loop(queue: Queue[T], traversed: Seq[T]): Seq[T] = {
+      if (queue.isEmpty) traversed.reverse
+      else {
+        val (current: T, remaining: Queue[T]) = queue.dequeue
+        val neighbours = getEdges(queue.head)
+        val visited = if (traversed.contains(current)) traversed else current +: traversed
+        val toBeVisited: Seq[T] = neighbours.filterNot(traversed.contains)
+        //TODO: why ++ not working? throwing class cast exception
+        val newQueue: Queue[T] = toBeVisited.foldLeft(remaining)(_ enqueue _)
+        loop(newQueue, visited)
+      }
+    }
+
+    loop(Queue(start), Seq())
+  }
+
+  override def isCyclic: Boolean = ???
 }
 
 
@@ -38,7 +148,7 @@ object Graph {
 
     // prepend operation complexity is O(1) and reverse is O(N) which is better than
     // append which translates to O(n * n -1/2) = O(n * 2)
-    Graph(graph.mapValues(_.reverse))
+    new DefaultGraph(graph.mapValues(_.reverse))
   }
 
   /**
@@ -55,71 +165,4 @@ object Graph {
     }.mkString("graph TD;\n", "\n", "")
     println(nodes)
   }
-
-  /**
-   * Depth first search traversal is based on stack representation. In the other words,
-   *
-   *  - Add initial element to the stack
-   *  - Pop the element from the stack
-   *     - add element to traversed elements
-   *     - if the element has edges push to the stack
-   *  - repeat step2 until stack is empty
-   *
-   * Recursive calls are also implemented via stack so it is easy to implement with recursion. It is perfectly legal to
-   * use stack kind of data structure.
-   * @param graph that needs to be traversed
-   * @tparam T type parameter
-   * @return the sequence of elements that are traversed in the order
-   */
-  def dfs[T](start: T, graph: Graph[T]): Seq[T] = {
-    // scala vector or list works like a stack, last in first out. (or) prepends new element
-    @tailrec
-    def loop(stack: Seq[T], traversed: Seq[T]): Seq[T] = {
-      if (stack.isEmpty) traversed.reverse
-      else {
-        val current = stack.head
-        val neighbours = graph.getEdges(current)
-        val toBeVisited = neighbours.filterNot(traversed.contains)
-        loop(toBeVisited ++ stack.tail, current +: traversed)
-      }
-    }
-
-    loop(Vector(start), Vector())
-  }
-
-  /**
-   * Breadth first search traversal is based on queue representation. In the other words,
-   *
-   *  - Add initial element to the queue
-   *  - take head element from the queue
-   *     - add element to traversed elements
-   *     - if the element has edges then append them the queue
-   *  - repeat step2 until queue is empty
-   *
-   * @param graph that needs to be traversed
-   * @tparam T type parameter
-   * @return the sequence of elements that are traversed in the order
-   */
-  def bfs[T](start: T, graph: Graph[T]): Seq[T] = {
-    @tailrec
-    def loop(queue: Queue[T], traversed: Seq[T]): Seq[T] = {
-      if (queue.isEmpty) traversed.reverse
-      else {
-        val (head: T, remaining: Queue[T]) = queue.dequeue
-        val neighbours = graph.getEdges(queue.head)
-        val toBeVisited: Seq[T] = neighbours.filterNot(traversed.contains)
-        //TODO: why ++ not working? throwing class cast exception
-        val newQueue: Queue[T] = toBeVisited.foldLeft(remaining)(_ enqueue _)
-        loop(newQueue, head +: traversed)
-      }
-    }
-
-    loop(Queue(start), Seq())
-  }
-
-  // TODO
-  def isCyclic[T](graph: Graph[T]): Boolean = ???
-
-  // TODO
-  def isConnected[T](graph: Graph[T], start: T, destination: T): Boolean = ???
 }
