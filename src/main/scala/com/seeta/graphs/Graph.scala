@@ -9,6 +9,7 @@ trait Graph[T] {
   def dfs(start: T): Seq[T]
   def isCyclic: Boolean
   def isConnected(src: T, des: T): Boolean
+  def connectedComponentsCount: Int
 }
 
 // TODO: Think about true representation of the Graph.
@@ -16,7 +17,7 @@ trait Graph[T] {
 class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
   def getEdges(key: T): Seq[T] = graph.getOrElse(key, Seq.empty[T])
 
-  private lazy val keys = graph.keys
+  private lazy val vertices = graph.keys.toList
   private lazy val start: T = graph.head._1
 
   override def toString: String = graph.map {
@@ -42,23 +43,23 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
     }
   }
 
-  private def contains(key: T): Boolean = keys.exists(_ == key)
+  private def contains(key: T): Boolean = vertices.contains(key)
 
   def isConnected(src: T, des: T): Boolean = {
     @tailrec
-    def loop(stack: Seq[T], visited: Seq[T], hasPath: Boolean): Boolean = {
+    def loop(stack: Seq[T], visited: Set[T], hasPath: Boolean): Boolean = {
       if (hasPath) hasPath
       else if (stack.isEmpty) false
       else {
         val current = stack.head
-        val newVisited = if (visited.contains(current)) visited else current +: visited
+        val newVisited = visited + current
         val neighboursToVisit = getEdges(current).filterNot(newVisited.contains)
         loop(neighboursToVisit ++ stack.tail, newVisited, current == des)
       }
     }
 
 
-    if (!contains(src) || !contains(des)) false else loop(Seq(src), Seq(), hasPath = false)
+    if (!contains(src) || !contains(des)) false else loop(Seq(src), Set(), hasPath = false)
   }
 
   /**
@@ -121,6 +122,22 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
   }
 
   override def isCyclic: Boolean = ???
+
+  /**
+   * This function returns the number of connected components. In other words, this calculates number of islands in the
+   * graph.
+   *
+   * This only works for the undirected graph. TODO: what about directed graph?
+   * @return the number of connected components
+   */
+  override def connectedComponentsCount: Int = {
+    val (visited, count) = vertices.foldLeft((Set.empty[T], 0)) {
+      case ((visited, count), vertex) if !visited.contains(vertex) => ((visited ++ dfs(vertex), count + 1))
+      case ((visited, count), vertex) if visited.contains(vertex) => ((visited, count))
+    }
+    assert(visited.size == vertices.size, "Failed to visit all the vertices")
+    count
+  }
 }
 
 

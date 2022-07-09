@@ -47,11 +47,11 @@ trait GraphTestDataHelper {
    * Undirected Graph:
    *   1 -- 2   9--10--11
    *   |    |
-   *   5 -- 4
+   *   5 -- 4   12
    *   |
    *   3
    *   |
    *   7
    */
-  val islandEdges: Edges[Int] = Edges.create(List((1, 2), (1, 5), (2, 4), (4, 5), (5, 3), (3, 7), (9, 10), (10, 11)))
+  val islandEdges: Edges[Int] = Edges.create(List((1, 2), (1, 5), (2, 4), (4, 5), (5, 3), (3, 7), (9, 10), (10, 11), (12, 12)))
 }

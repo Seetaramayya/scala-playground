@@ -13,7 +13,6 @@ class GraphSpec extends WordSpec with Matchers with GraphTestDataHelper {
       graph1.dfs(start = 1) shouldBe Seq(1, 2, 4, 5, 3, 7, 10, 15, 20, 25)
       graph1.bfs(start = 1) shouldBe Seq(1, 2, 5, 10, 20, 4, 3, 15, 25, 7)
 
-      println(cyclicGraph)
       cyclicGraph.dfs(start = 1) shouldBe Seq(1, 2, 4, 5, 3, 7)
       cyclicGraph.bfs(start = 1) shouldBe Seq(1, 2, 5, 4, 3, 7)
 
@@ -40,6 +39,15 @@ class GraphSpec extends WordSpec with Matchers with GraphTestDataHelper {
       islandGraph.isConnected(10, 9) shouldBe true
       islandGraph.isConnected(11, 9) shouldBe true
       islandGraph.isConnected(9, 9) shouldBe true
+    }
+
+    "return the number of islands in the given graph " in {
+      graph1.connectedComponentsCount shouldBe 1
+//      graph2.connectedComponentsCount shouldBe 1
+      cyclicGraph.connectedComponentsCount shouldBe 1
+      Graph.mermaidRepresentationOfGraph(islandGraph)
+      Graph.mermaidRepresentationOfGraph(graph2)
+      islandGraph.connectedComponentsCount shouldBe 3
     }
   }
 }
