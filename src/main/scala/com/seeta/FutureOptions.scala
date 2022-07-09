@@ -2,6 +2,7 @@ package com.seeta
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.io.StdIn
 
 case class FutureOptions[A](inner: Future[Option[A]]) {
   def map[B](f: A => B): FutureOptions[B] = {
@@ -12,7 +13,7 @@ case class FutureOptions[A](inner: Future[Option[A]]) {
     FutureOptions {
       inner.flatMap {
         case Some(a) => f(a).inner
-        case None => Future.successful(None)
+        case None    => Future.successful(None)
       }
     }
   }
@@ -30,16 +31,17 @@ object FutureOptionsTest extends App {
 
   val futureResult: Future[Option[Set[(Int, Int)]]] = result.value
 
-  val in = Console.readLine("Type Either int or string")
-  val input: Either[String, Int] = try {
-    Right(in.toInt)
-  } catch {
-    case ex: Exception => Left(in)
-  }
+  val in = StdIn.readLine("Type Either int or string")
+  val input: Either[String, Int] =
+    try {
+      Right(in.toInt)
+    } catch {
+      case ex: Exception => Left(in)
+    }
 
   println(input match {
     case Right(x) => x + 1
-    case Left(x) => x
+    case Left(x)  => x
   })
 
 }

@@ -2,6 +2,7 @@ package com.seeta.future
 
 import scala.concurrent._
 import ExecutionContext.Implicits.global
+import scala.util._
 
 object HelloFuture extends App {
   val f: Future[Int] = Future {
@@ -10,12 +11,10 @@ object HelloFuture extends App {
     source.toSeq.indexOfSlice("myKeyword")
   }
 
-  f onSuccess {
-    case idx => println(s"The keyword first appearces at position is $idx")
-  }
-
-  f onFailure {
-    case t =>
+  f.onComplete {
+    case Success(idx) =>
+      println(s"The keyword first appearces at position is $idx")
+    case Failure(t) =>
       println("Future is failed")
       t.printStackTrace
   }

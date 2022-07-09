@@ -12,12 +12,18 @@ import com.seeta.jws.JoseSigner.UntrustedSignee
 import scala.util.Try
 import scala.collection.JavaConverters._
 
-/**
-  * https://tools.ietf.org/html/rfc7515
+/** https://tools.ietf.org/html/rfc7515
   */
 trait Signer {
-  def sign(payload: String, privateKey: PrivateKey, certificates: X509Certificate*): String
-  def unsign(signedPayLoad: String, publicKey: PublicKey): Either[Throwable, String]
+  def sign(
+      payload: String,
+      privateKey: PrivateKey,
+      certificates: X509Certificate*
+  ): String
+  def unsign(
+      signedPayLoad: String,
+      publicKey: PublicKey
+  ): Either[Throwable, String]
 }
 
 object JoseSigner {
@@ -28,19 +34,27 @@ object JoseSigner {
 
 class JoseSigner extends Signer {
 
-  override def sign(payload: String, privateKey: PrivateKey, certificates: X509Certificate*): String = {
+  override def sign(
+      payload: String,
+      privateKey: PrivateKey,
+      certificates: X509Certificate*
+  ): String = {
     val signer = new RSASSASigner(privateKey)
     def mapCertToBase64(cert: X509Certificate) = Base64.encode(cert.getEncoded)
     val jWSObject = new JWSObject(
       new JWSHeader.Builder(JWSAlgorithm.RS256)
         .x509CertChain(certificates.toList.map(mapCertToBase64).asJava)
         .build(),
-      new Payload(payload))
+      new Payload(payload)
+    )
     jWSObject.sign(signer)
     jWSObject.serialize()
   }
 
-  override def unsign(signedPayLoad: String, publicKey: PublicKey): Either[Throwable, String] = {
+  override def unsign(
+      signedPayLoad: String,
+      publicKey: PublicKey
+  ): Either[Throwable, String] = {
     def parse(): Either[Throwable, JWSObject] = {
       Try(JWSObject.parse(signedPayLoad)).toEither
     }
@@ -48,7 +62,7 @@ class JoseSigner extends Signer {
     def assertVerification(jWSObject: JWSObject): Either[Throwable, Unit] = {
       val verifier = new RSASSAVerifier(publicKey.asInstanceOf[RSAPublicKey])
       val isGood = jWSObject.verify(verifier)
-      Either.cond(isGood, Unit, UntrustedSignee("Verification failed"))
+      Either.cond(isGood, (), UntrustedSignee("Verification failed"))
     }
 
     def extract(jWSObject: JWSObject): Either[Throwable, String] = {
