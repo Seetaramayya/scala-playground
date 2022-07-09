@@ -1,9 +1,10 @@
 package com.seeta.leetcode.week292
 
 import com.seeta.leetcode.week292.LargestGoodInteger.largestGoodInteger
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class LargestGoodIntegerSpec extends WordSpec with Matchers {
+class LargestGoodIntegerSpec extends AnyWordSpec with Matchers {
   "LargestGoodInteger" should {
     "return correct 3 digit numbers if it exits" in {
       largestGoodInteger("6777133339") shouldBe "777"

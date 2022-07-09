@@ -1,13 +1,14 @@
 package com.seeta.codility.lesson2
 
 import com.seeta.codility.lesson2.OddOccurrencesInArray.solution
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 /**
   *
   * @author Seeta (Ramayya) Vadali
   */
-class OddOccurrencesInArraySpec extends WordSpec with Matchers {
+class OddOccurrencesInArraySpec extends AnyWordSpec with Matchers {
 
   "OddOccurrencesInArraySpec" should {
 

@@ -2,10 +2,11 @@ package com.seeta.leetcode.week292
 
 import com.seeta.leetcode.week292.LargestGoodInteger.{isNotNumber, largestGoodInteger}
 import org.scalacheck.Gen
-import org.scalatest.{Matchers, WordSpecLike}
-import org.scalatest.prop.PropertyChecks
+import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import org.scalatest.wordspec.AnyWordSpecLike
 
-class LargestGoodIntegerPropertyCheckSpec extends PropertyChecks with WordSpecLike with Matchers {
+class LargestGoodIntegerPropertyCheckSpec extends ScalaCheckPropertyChecks with AnyWordSpecLike with Matchers {
   val seed: Gen[String] = Gen.listOf(Gen.oneOf((0 to 9).map(i => s"$i$i$i").toList)).map(_.mkString(""))
   val inputNumbers: Gen[String] = Gen.oneOf(true, false).flatMap { input =>
     if (input) seed

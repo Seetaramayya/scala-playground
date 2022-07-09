@@ -1,9 +1,10 @@
 package com.seeta.hackerrank.test.algorithms.warmup
 
 import Ex9TimeConversion.timeConversion
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class Ex9TimeConversionSpec extends WordSpec with Matchers {
+class Ex9TimeConversionSpec extends AnyWordSpec with Matchers {
  "Time conversion" should {
    "work" in {
      timeConversion("07:05:45PM") shouldBe "19:05:45"

@@ -2,9 +2,10 @@ package com.seeta.tree
 
 import com.seeta.tree.Tree.{bfs, dfsInOrder, dfsPostOrder, dfsPreOrder, height}
 import com.seeta.tree.TreeHelpers._
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class TreeSpec extends WordSpec with Matchers {
+class TreeSpec extends AnyWordSpec with Matchers {
   "Tree height" should {
     "calculate the height of the tree" in {
       height(createTree()) shouldBe 3

@@ -1,12 +1,13 @@
 package com.seeta.codility.company1
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 /**
   *
   * @author Seeta (Ramayya) Vadali
   */
-class Task1Spec extends WordSpec with Matchers {
+class Task1Spec extends AnyWordSpec with Matchers {
   "Task1" should {
     //TODO: not covering all test cases may be `property` based testing
     "blah" in {

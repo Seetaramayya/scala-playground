@@ -1,8 +1,9 @@
 package com.seeta.codility.lesson1
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class BinaryGapSpec extends WordSpec with Matchers {
+class BinaryGapSpec extends AnyWordSpec with Matchers {
 
   "BinaryGap" should {
     "produce" in {

@@ -4,9 +4,10 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 import com.seeta.amazon.StairsChallenge._
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class StairsChallengeSpec extends WordSpec with Matchers {
+class StairsChallengeSpec extends AnyWordSpec with Matchers {
 
   "StairsChallengeSpec" should {
     "return number of ways for (1, 2) steps" in {

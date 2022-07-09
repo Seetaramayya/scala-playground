@@ -1,12 +1,13 @@
 package com.seeta.leetcode
 
-import com.seeta.leetcode.RomanNumbers.{AllowedCharacters, CharWeights, romanToInt}
-import org.scalatest.prop.PropertyChecks
+import com.seeta.leetcode.RomanNumbers.{CharWeights, romanToInt}
 import org.scalacheck.Gen
-import org.scalatest.{Matchers, WordSpec, WordSpecLike}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
 // https://www.scalatest.org/user_guide/generator_driven_property_checks
-class RomanNumbersPropertyCheckSpec extends PropertyChecks with WordSpecLike with Matchers {
+class RomanNumbersPropertyCheckSpec extends ScalaCheckPropertyChecks with AnyWordSpecLike with Matchers {
   val validRomanChars: Gen[Char] = Gen.oneOf(RomanNumbers.AllowedCharacters)
   val validRomanNumbers: Gen[String] = for {
     c <- validRomanChars

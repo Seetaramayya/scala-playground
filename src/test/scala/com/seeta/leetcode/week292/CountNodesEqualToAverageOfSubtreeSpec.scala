@@ -1,9 +1,10 @@
 package com.seeta.leetcode.week292
 
 import com.seeta.leetcode.week292.Tree.{averageOfSubtree, countAndSumOfSubTree, printTree}
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class CountNodesEqualToAverageOfSubtreeSpec extends WordSpec with Matchers {
+class CountNodesEqualToAverageOfSubtreeSpec extends AnyWordSpec with Matchers {
   "CountNodesEqualToAverageOfSubtree" should {
     "count number of nodes in a tree" in {
       averageOfSubtree(createTree()) shouldBe 5

@@ -3,15 +3,16 @@ package com.seeta.aws
 import java.io.File
 import java.nio.file.{Files, Paths}
 import java.util.UUID
-
 import org.apache.commons.io.FileUtils
-import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
+import org.scalatest.BeforeAndAfterAll
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConverters._
 import scala.concurrent.{Await, Future}
 
-class S3BucketServiceSpec extends WordSpec with Matchers with BeforeAndAfterAll {
+class S3BucketServiceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll {
   private val log = LoggerFactory.getLogger(getClass)
   private val s3 = new S3BucketService
 

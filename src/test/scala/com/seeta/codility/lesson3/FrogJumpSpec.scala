@@ -1,13 +1,14 @@
 package com.seeta.codility.lesson3
 
 import com.seeta.codility.lesson3.FrogJump.solution
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 /**
   *
   * @author Seeta (Ramayya) Vadali
   */
-class FrogJumpSpec extends WordSpec with Matchers {
+class FrogJumpSpec extends AnyWordSpec with Matchers {
   "FrogJumpSpec" should {
     "solution" in {
       solution(10, 85, 30) shouldBe 3

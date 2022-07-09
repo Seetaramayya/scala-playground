@@ -1,9 +1,10 @@
 package com.seeta.leetcode
 
 import com.seeta.leetcode.RomanNumbers._
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class BasicRomanNumbersSpec extends WordSpec with Matchers {
+class BasicRomanNumbersSpec extends AnyWordSpec with Matchers {
   "Roman numbers string to int conversion" should {
     "return correct" in {
       romanToInt("I") shouldBe 1

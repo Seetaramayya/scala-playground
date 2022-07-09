@@ -1,8 +1,9 @@
 package com.seeta.utils
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class CertificateHelperSpec extends WordSpec with Matchers {
+class CertificateHelperSpec extends AnyWordSpec with Matchers {
   "CertificateHelperSpec" should {
     "verifyCertificate" in {
 //      CertificateHelper.verifyCertificate()

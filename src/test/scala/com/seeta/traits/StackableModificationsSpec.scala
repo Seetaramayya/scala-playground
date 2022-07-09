@@ -1,8 +1,9 @@
 package com.seeta.traits
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class StackableModificationsSpec extends WordSpec with Matchers {
+class StackableModificationsSpec extends AnyWordSpec with Matchers {
   "Stackable Modifications" should {
     "verify filtering before incrementing modification applied to queue" in {
       val queue = StackableModifications.filterAndIncrementQueue

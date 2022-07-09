@@ -2,10 +2,11 @@ package com.seeta.jws
 
 import java.security.KeyPairGenerator
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 
-class JoseSignerSpec extends WordSpec with Matchers {
+class JoseSignerSpec extends AnyWordSpec with Matchers {
   "JoseSigner" should {
     "sign given payload" in {
       val keyPair = KeyPairGenerator.getInstance("RSA").genKeyPair()

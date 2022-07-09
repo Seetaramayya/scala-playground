@@ -1,8 +1,9 @@
 package com.seeta.graphs
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class GraphSpec extends WordSpec with Matchers with GraphTestDataHelper {
+class GraphSpec extends AnyWordSpec with Matchers with GraphTestDataHelper {
   private val graph1 = Graph.createGraph(edges)
   private val graph2 = Graph.createGraph(edges2)
   private val cyclicGraph = Graph.createGraph(cyclicEdges)

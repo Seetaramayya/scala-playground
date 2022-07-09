@@ -1,12 +1,13 @@
 package com.seeta.codility.lesson2
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 /**
   *
   * @author Seeta (Ramayya) Vadali
   */
-class CyclicRotationSpec extends WordSpec with Matchers {
+class CyclicRotationSpec extends AnyWordSpec with Matchers {
   "CyclicRotationSpec" should {
     "solution" in {
       CyclicRotation.solution(Array(), 0) shouldBe Array()
