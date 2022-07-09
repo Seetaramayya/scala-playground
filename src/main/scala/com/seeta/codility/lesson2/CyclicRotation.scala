@@ -2,10 +2,10 @@ package com.seeta.codility.lesson2
 
 import scala.annotation.tailrec
 
-/**
-  * Problem: https://app.codility.com/programmers/lessons/2-arrays/cyclic_rotation/
- *
-  * @author Seeta (Ramayya) Vadali
+/** Problem: https://app.codility.com/programmers/lessons/2-arrays/cyclic_rotation/
+  *
+  * @author
+  *   Seeta (Ramayya) Vadali
   */
 object CyclicRotation {
   def solution(a: Array[Int], k: Int): Array[Int] = {

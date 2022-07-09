@@ -14,11 +14,12 @@ import scala.concurrent.{Await, Future}
 
 class S3BucketServiceSpec extends AnyWordSpec with Matchers with BeforeAndAfterAll {
   private val log = LoggerFactory.getLogger(getClass)
-  private val s3 = new S3BucketService
+  private val s3  = new S3BucketService
 
-  private val fileExtensions = List("yml", "yaml", "sh", "py", "conf","config", "cfg", "repo", "json")
+  private val fileExtensions   = List("yml", "yaml", "sh", "py", "conf", "config", "cfg", "repo", "json")
   private val binaryExtensions = List("rpm", "tgz", "crt", "gz", "args", "pub", "jar")
-  private val tempDir = Files.createDirectory(Paths.get(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString))
+  private val tempDir =
+    Files.createDirectory(Paths.get(System.getProperty("java.io.tmpdir"), UUID.randomUUID().toString))
 
   "S3 bucket service" should {
     "create, find, get and delete bucket operations" in {
@@ -36,10 +37,10 @@ class S3BucketServiceSpec extends AnyWordSpec with Matchers with BeforeAndAfterA
       s3.findBucket(bucketName) shouldBe None
       s3.createBucket(bucketName).await
 
-      val seeta = getResource("aws/samples/seeta.png")
+      val seeta   = getResource("aws/samples/seeta.png")
       val rainbow = getResource("aws/samples/rainbow.jpg")
 
-      //TODO: ugly blocking call, convert it to async call
+      // TODO: ugly blocking call, convert it to async call
       s3.putObject(bucketName, "photos/seeta.png", seeta)
       s3.putObject(bucketName, "photos/rainbow.jpg", rainbow)
 

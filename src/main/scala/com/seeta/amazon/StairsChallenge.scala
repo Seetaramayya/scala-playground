@@ -3,9 +3,8 @@ package com.seeta.amazon
 import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
 
-/**
-  *
-  * @author Seeta (Ramayya) Vadali
+/** @author
+  *   Seeta (Ramayya) Vadali
   */
 object StairsChallenge {
   type Step = Int
@@ -27,7 +26,7 @@ object StairsChallenge {
         waysByPosition.last
       } else {
         val allowedSubSteps = steps.map(position - _).filter(_ >= 0)
-        val value = allowedSubSteps.toList.map(waysByPosition(_)).sum
+        val value           = allowedSubSteps.toList.map(waysByPosition(_)).sum
         loop(waysByPosition += value, position + 1)
       }
     }

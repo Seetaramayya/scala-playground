@@ -9,7 +9,7 @@ case class Node[T](value: T, left: Option[Node[T]] = None, right: Option[Node[T]
 
 object Tree {
   def height[T](tree: Node[T]): Int = {
-    val leftHeight = tree.left.fold(0)(node => height(node))
+    val leftHeight  = tree.left.fold(0)(node => height(node))
     val rightHeight = tree.right.fold(0)(node => height(node))
     if (leftHeight < rightHeight) rightHeight + 1 else leftHeight + 1
   }
@@ -21,9 +21,9 @@ object Tree {
       else {
         val current = visitList.head
         current match {
-          case Node(value, None, None) => loop(visitList.tail, accumulated :+ value)
-          case Node(value, Some(left), None) => loop(visitList.tail :+ left, accumulated :+ value)
-          case Node(value, None, Some(right)) => loop(visitList.tail :+ right, accumulated :+ value)
+          case Node(value, None, None)              => loop(visitList.tail, accumulated :+ value)
+          case Node(value, Some(left), None)        => loop(visitList.tail :+ left, accumulated :+ value)
+          case Node(value, None, Some(right))       => loop(visitList.tail :+ right, accumulated :+ value)
           case Node(value, Some(left), Some(right)) => loop(visitList.tail :+ left :+ right, accumulated :+ value)
         }
       }
@@ -31,28 +31,21 @@ object Tree {
     loop(List(tree), List())
   }
 
-  /**
-   *       1
-   *    2     3
-   * 4    5 6    7
-   *
-   * 1, 2, 4, 5, 3, 6, 7
-   *
-   * call                            stack
-   * ++++++++++++++++++++++++     => +++++
-   * loop(Some(1), List())        => ...
-   * loop(Some(2), List(1))       => (3)
-   * loop(Some(4), List(1,2)      => (5, 3)
-   * loop(None,    List(1,2, 4)   => (None, 5, 3)
-   *
-   * |     |
-   * |     |
-   * | (3) |
-   * -----
-   */
+  /** 1 2 3 4 5 6 7
+    *
+    * 1, 2, 4, 5, 3, 6, 7
+    *
+    * call stack ++++++++++++++++++++++++ => +++++ loop(Some(1), List()) => ... loop(Some(2), List(1)) => (3)
+    * loop(Some(4), List(1,2) => (5, 3) loop(None, List(1,2, 4) => (None, 5, 3)
+    *
+    * |     |
+    * |:----|
+    * |     |
+    * | (3) |
+    */
   def dfsPreOrder[T](root: Node[T]): List[T] = {
     val value = root.value
-    val left = root.left.fold(List.empty[T])(dfsPreOrder)
+    val left  = root.left.fold(List.empty[T])(dfsPreOrder)
     val right = root.right.fold(List.empty[T])(dfsPreOrder)
 
     (value +: left) ++ right
@@ -70,29 +63,23 @@ object Tree {
 //    loop(Some(root), List())
   }
 
-  /**
-   *       1
-   *    2     3
-   * 4    5 6    7
-   *
-   * 4, 2, 5, 1, 6, 3, 7
-   */
+  /** 1 2 3 4 5 6 7
+    *
+    * 4, 2, 5, 1, 6, 3, 7
+    */
   def dfsInOrder[T](root: Node[T]): List[T] = {
-    val left = root.left.fold(List.empty[T])(dfsInOrder)
+    val left  = root.left.fold(List.empty[T])(dfsInOrder)
     val value = root.value
     val right = root.right.fold(List.empty[T])(dfsInOrder)
     (left :+ value) ++ right
   }
 
-  /**
-   *       1
-   *    2     3
-   * 4    5 6    7
-   *
-   * 4, 5, 2, 6, 7, 3, 1
-   */
+  /** 1 2 3 4 5 6 7
+    *
+    * 4, 5, 2, 6, 7, 3, 1
+    */
   def dfsPostOrder[T](root: Node[T]): List[T] = {
-    val left = root.left.fold(List.empty[T])(dfsPostOrder)
+    val left  = root.left.fold(List.empty[T])(dfsPostOrder)
     val value = root.value
     val right = root.right.fold(List.empty[T])(dfsPostOrder)
     (left ++ right) :+ value

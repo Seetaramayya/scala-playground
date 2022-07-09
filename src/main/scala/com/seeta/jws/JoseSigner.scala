@@ -39,7 +39,7 @@ class JoseSigner extends Signer {
       privateKey: PrivateKey,
       certificates: X509Certificate*
   ): String = {
-    val signer = new RSASSASigner(privateKey)
+    val signer                                 = new RSASSASigner(privateKey)
     def mapCertToBase64(cert: X509Certificate) = Base64.encode(cert.getEncoded)
     val jWSObject = new JWSObject(
       new JWSHeader.Builder(JWSAlgorithm.RS256)
@@ -61,7 +61,7 @@ class JoseSigner extends Signer {
 
     def assertVerification(jWSObject: JWSObject): Either[Throwable, Unit] = {
       val verifier = new RSASSAVerifier(publicKey.asInstanceOf[RSAPublicKey])
-      val isGood = jWSObject.verify(verifier)
+      val isGood   = jWSObject.verify(verifier)
       Either.cond(isGood, (), UntrustedSignee("Verification failed"))
     }
 
@@ -71,8 +71,8 @@ class JoseSigner extends Signer {
 
     for {
       jwsObject <- parse()
-      _ <- assertVerification(jwsObject)
-      unsigned <- extract(jwsObject)
+      _         <- assertVerification(jwsObject)
+      unsigned  <- extract(jwsObject)
     } yield {
       unsigned
     }

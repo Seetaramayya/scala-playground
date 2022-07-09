@@ -15,7 +15,6 @@ object Edge {
   def createDirectedEdge[T](a: T, b: T): Edge[T] = DirectedEdge[T](a, b)
 }
 
-
 case class Edges[T](private val _edges: Seq[Edge[T]]) {
   def foldLeft[U](z: U)(f: (U, Edge[T]) => U): U = _edges.foldLeft(z)(f)
 
@@ -23,12 +22,15 @@ case class Edges[T](private val _edges: Seq[Edge[T]]) {
 }
 
 object Edges {
-  /**
-   * Creates undirected edges by default
-   * @param edges to be connected
-   * @tparam T generic type parameter
-   * @return the edges that represents given edges
-   */
+
+  /** Creates undirected edges by default
+    * @param edges
+    *   to be connected
+    * @tparam T
+    *   generic type parameter
+    * @return
+    *   the edges that represents given edges
+    */
   def create[T](edges: Seq[(T, T)]): Edges[T] = Edges(edges.map((Edge.createUndirectedEdge[T] _).tupled))
 
   def createDirectedEdges[T](edges: Seq[(T, T)]): Edges[T] = Edges(edges.map((Edge.createDirectedEdge[T] _).tupled))

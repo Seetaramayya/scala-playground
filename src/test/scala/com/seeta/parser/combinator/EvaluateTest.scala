@@ -3,7 +3,6 @@ package com.seeta.parser.combinator
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-
 class EvaluateTest extends AnyWordSpec with Matchers {
   "Arithmetic" should {
     "bla" in {

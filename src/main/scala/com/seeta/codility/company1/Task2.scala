@@ -1,8 +1,7 @@
 package com.seeta.codility.company1
 
-/**
-  *
-  * @author Seeta (Ramayya) Vadali
+/** @author
+  *   Seeta (Ramayya) Vadali
   */
 object Task2 {
   def solution1(a: Array[Int]): Int = {
@@ -16,12 +15,11 @@ object Task2 {
     max
   }
 
-
   def solution(a: Array[Int]): Int = {
     var maxSumP: Long = Integer.MIN_VALUE
     var maxSumQ: Long = Integer.MIN_VALUE
 
-    for(i <- a.indices) {
+    for (i <- a.indices) {
       maxSumP = Math.max(a(i) - i, maxSumP)
       maxSumQ = Math.max(a(i) + i, maxSumQ)
     }

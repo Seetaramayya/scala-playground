@@ -4,17 +4,16 @@ import com.seeta.traits.C
 
 import scala.reflect.runtime.universe
 
-/**
-  *
-  * @author Seeta (Ramayya) Vadali
+/** @author
+  *   Seeta (Ramayya) Vadali
   */
 object FindAllSubclasses extends App {
-  val mirror = universe.runtimeMirror(getClass.getClassLoader)
+  val mirror   = universe.runtimeMirror(getClass.getClassLoader)
   val typeBase = universe.typeOf[C]
 
-  val classSymbol = typeBase.typeSymbol.asClass
+  val classSymbol        = typeBase.typeSymbol.asClass
   private val subClasses = classSymbol.knownDirectSubclasses.map(_.asClass)
-  val subClassNames = subClasses.map(_.fullName).mkString(",")
+  val subClassNames      = subClasses.map(_.fullName).mkString(",")
   println(classSymbol.baseClasses.map(_.asClass).map(_.fullName).mkString(","))
 
   println("-" * 50)

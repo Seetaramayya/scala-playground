@@ -34,5 +34,4 @@ class TreeSpec extends AnyWordSpec with Matchers {
     }
   }
 
-
 }

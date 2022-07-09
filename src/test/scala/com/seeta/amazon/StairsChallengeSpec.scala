@@ -67,9 +67,9 @@ class StairsChallengeSpec extends AnyWordSpec with Matchers {
     "(extreme) return number of ways for (1) as steps, input is 100,000,000" in {
       implicit val steps: Set[Int] = Set(1)
       numberOfWays(0) shouldBe 1
-      val goal = 100000000
+      val goal  = 100000000
       val start = LocalDateTime.now()
-      //23414 ms in case of recursive call, another approach 23873 ms
+      // 23414 ms in case of recursive call, another approach 23873 ms
       numberOfWays(goal) shouldBe 1
 
       println(s"total time taken for $goal is ${LocalDateTime.now().until(start, ChronoUnit.MILLIS).abs} ms")

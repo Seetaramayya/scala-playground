@@ -1,14 +1,14 @@
 package com.seeta.reflection
 
 import scala.reflect.runtime.universe
-/**
-  * Instantiate a type at Runtime:
-  * https://docs.scala-lang.org/overviews/reflection/overview.html
-  * @author Seeta (Ramayya) Vadali
+
+/** Instantiate a type at Runtime: https://docs.scala-lang.org/overviews/reflection/overview.html
+  * @author
+  *   Seeta (Ramayya) Vadali
   */
 case class Person(name: String)
 object CreateInstance extends App {
-  //obtaining correct mirror
+  // obtaining correct mirror
   val mirror = universe.runtimeMirror(getClass.getClassLoader)
 
   private val personType = universe.typeOf[Person]

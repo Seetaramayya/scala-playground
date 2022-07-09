@@ -4,8 +4,8 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 class GraphSpec extends AnyWordSpec with Matchers with GraphTestDataHelper {
-  private val graph1 = Graph.createGraph(edges)
-  private val graph2 = Graph.createGraph(edges2)
+  private val graph1      = Graph.createGraph(edges)
+  private val graph2      = Graph.createGraph(edges2)
   private val cyclicGraph = Graph.createGraph(cyclicEdges)
   private val islandGraph = Graph.createGraph(islandEdges)
 

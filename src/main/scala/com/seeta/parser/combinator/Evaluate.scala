@@ -4,16 +4,16 @@ import scala.util.parsing.combinator.JavaTokenParsers
 
 class Evaluate extends JavaTokenParsers {
   // expr = term { + term | - term }
-  def expr: Parser[Double] = term ~ rep("+" ~ term | "-" ~ term) ^^ {
-    case (x ~ list) => (x /: list) {
+  def expr: Parser[Double] = term ~ rep("+" ~ term | "-" ~ term) ^^ { case (x ~ list) =>
+    (x /: list) {
       case (a, "+" ~ b) => a + b
       case (a, "-" ~ b) => a - b
     }
   }
 
   // term = factor { * factor | / factor }
-  def term: Parser[Double] = factor ~ rep("*" ~ factor | "/" ~ factor) ^^ {
-    case number ~ list => (number /: list) {
+  def term: Parser[Double] = factor ~ rep("*" ~ factor | "/" ~ factor) ^^ { case number ~ list =>
+    (number /: list) {
       case (x, "*" ~ y) => x * y
       case (x, "/" ~ y) => x / y
     }

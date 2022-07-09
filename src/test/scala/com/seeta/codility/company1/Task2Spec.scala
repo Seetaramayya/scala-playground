@@ -3,9 +3,8 @@ package com.seeta.codility.company1
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-/**
-  *
-  * @author Seeta (Ramayya) Vadali
+/** @author
+  *   Seeta (Ramayya) Vadali
   */
 class Task2Spec extends AnyWordSpec with Matchers {
   "Task2" should {

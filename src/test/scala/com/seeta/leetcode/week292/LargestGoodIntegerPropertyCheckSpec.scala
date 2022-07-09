@@ -13,9 +13,8 @@ class LargestGoodIntegerPropertyCheckSpec extends ScalaCheckPropertyChecks with 
     else Gen.numStr
   }
 
-  val validInput: Gen[String] = inputNumbers.filter(input => input.length >= 3 && input.length <= 1000)
+  val validInput: Gen[String]   = inputNumbers.filter(input => input.length >= 3 && input.length <= 1000)
   val inValidInput: Gen[String] = inputNumbers.filter(input => input.length < 3 || input.length > 1000)
-
 
   "LargestGoodInteger" should {
     "return a string that should be substring of original string or empty" in {

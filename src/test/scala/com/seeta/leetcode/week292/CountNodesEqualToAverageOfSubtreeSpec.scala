@@ -12,7 +12,7 @@ class CountNodesEqualToAverageOfSubtreeSpec extends AnyWordSpec with Matchers {
   }
 
   private def createTree(): TreeNode = {
-    val left = new TreeNode(8, new TreeNode(0), new TreeNode(1))
+    val left  = new TreeNode(8, new TreeNode(0), new TreeNode(1))
     val right = new TreeNode(5, null, new TreeNode(6))
     new TreeNode(4, left, right)
   }

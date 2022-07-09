@@ -3,9 +3,8 @@ package com.seeta.codility.lesson3
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-/**
-  *
-  * @author Seeta (Ramayya) Vadali
+/** @author
+  *   Seeta (Ramayya) Vadali
   */
 class TapeEquilibriumSpec extends AnyWordSpec with Matchers {
 

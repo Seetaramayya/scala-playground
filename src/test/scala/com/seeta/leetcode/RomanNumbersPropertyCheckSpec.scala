@@ -15,7 +15,6 @@ class RomanNumbersPropertyCheckSpec extends ScalaCheckPropertyChecks with AnyWor
     s <- Gen.const(c.toString * n)
   } yield s
 
-
   "RomanNumbersPropertyCheck" should {
     "return times of the weight if the string has same characters" in {
       forAll(validRomanNumbers) { romanNumber =>

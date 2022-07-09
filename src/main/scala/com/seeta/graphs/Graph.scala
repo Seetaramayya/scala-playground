@@ -31,8 +31,8 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
     def loop(stack: Seq[T], visited: Set[T], result: Boolean): Boolean = {
       if (stack.isEmpty || result) result
       else {
-        val current = stack.head
-        val neighbours = getEdges(current)
+        val current        = stack.head
+        val neighbours     = getEdges(current)
         val alreadyVisited = neighbours.toSet.intersect(visited)
         loop(
           neighbours ++ stack.tail,
@@ -58,8 +58,8 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
       if (hasPath) hasPath
       else if (stack.isEmpty) false
       else {
-        val current = stack.head
-        val newVisited = visited + current
+        val current           = stack.head
+        val newVisited        = visited + current
         val neighboursToVisit = getEdges(current).filterNot(newVisited.contains)
         loop(neighboursToVisit ++ stack.tail, newVisited, current == des)
       }
@@ -71,15 +71,16 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
 
   /** Depth first search traversal is based on stack representation. In the other words,
     *
-    *  - Add initial element to the stack
-    *  - Pop the element from the stack
+    *   - Add initial element to the stack
+    *   - Pop the element from the stack
     *     - add element to traversed elements
     *     - if the element has edges push to the stack
-    *  - repeat step2 until stack is empty
+    *   - repeat step2 until stack is empty
     *
     * Recursive calls are also implemented via stack so it is easy to implement with recursion. It is perfectly legal to
     * use stack kind of data structure.
-    * @return the sequence of elements that are traversed in the order
+    * @return
+    *   the sequence of elements that are traversed in the order
     */
   def dfs(start: T): Seq[T] = {
     // scala vector or list works like a stack, last in first out. (or) prepends new element
@@ -87,7 +88,7 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
     def loop(stack: Seq[T], traversed: Seq[T]): Seq[T] = {
       if (stack.isEmpty) traversed.reverse
       else {
-        val current = stack.head
+        val current    = stack.head
         val neighbours = getEdges(current)
         val visited =
           if (traversed.contains(current)) traversed else current +: traversed
@@ -101,13 +102,14 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
 
   /** Breadth first search traversal is based on queue representation. In the other words,
     *
-    *  - Add initial element to the queue
-    *  - take head element from the queue
+    *   - Add initial element to the queue
+    *   - take head element from the queue
     *     - add element to traversed elements
     *     - if the element has edges then append them the queue
-    *  - repeat step2 until queue is empty
+    *   - repeat step2 until queue is empty
     *
-    * @return the sequence of elements that are traversed in the order
+    * @return
+    *   the sequence of elements that are traversed in the order
     */
   def bfs(start: T): Seq[T] = {
     @tailrec
@@ -115,11 +117,11 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
       if (queue.isEmpty) traversed.reverse
       else {
         val (current: T, remaining: Queue[T]) = queue.dequeue
-        val neighbours = getEdges(queue.head)
+        val neighbours                        = getEdges(queue.head)
         val visited =
           if (traversed.contains(current)) traversed else current +: traversed
         val toBeVisited: Seq[T] = neighbours.filterNot(traversed.contains)
-        //TODO: why ++ not working? throwing class cast exception
+        // TODO: why ++ not working? throwing class cast exception
         val newQueue: Queue[T] = toBeVisited.foldLeft(remaining)(_ enqueue _)
         loop(newQueue, visited)
       }
@@ -134,7 +136,8 @@ class DefaultGraph[T](val graph: Map[T, Seq[T]]) extends Graph[T] {
     * graph.
     *
     * This only works for the undirected graph. TODO: what about directed graph?
-    * @return the number of connected components
+    * @return
+    *   the number of connected components
     */
   override def connectedComponentsCount: Int = {
     val (visited, count) = vertices.foldLeft((Set.empty[T], 0)) {
@@ -153,9 +156,12 @@ object Graph {
   def apply[T](edges: Edges[T]): Graph[T] = createGraph(edges)
 
   /** Constructs graph with given undirected edges.
-    * @param edges that connects nodes, these edges are undirected
-    * @tparam T generic type parameter
-    * @return Graph that represents given undirected edges
+    * @param edges
+    *   that connects nodes, these edges are undirected
+    * @tparam T
+    *   generic type parameter
+    * @return
+    *   Graph that represents given undirected edges
     */
   def createGraph[T](edges: Edges[T]): Graph[T] = {
     def addConnection(
@@ -182,12 +188,14 @@ object Graph {
     new DefaultGraph(graph.view.mapValues(_.reverse).toMap)
   }
 
-  /** Mermaid is JS plugin in Intellij which converts.
-    * Output of the function can be copy pasted to https://mermaid.live/edit
+  /** Mermaid is JS plugin in Intellij which converts. Output of the function can be copy pasted to
+    * https://mermaid.live/edit
     *
     * TODO: check is it possible to print directly graph instead of mermaid string
-    * @param graph which you would like to print
-    * @tparam T type parameter of the graph
+    * @param graph
+    *   which you would like to print
+    * @tparam T
+    *   type parameter of the graph
     */
   def mermaidRepresentationOfGraph[T](graph: Graph[T]): Unit = {
     val nodes = graph.graph

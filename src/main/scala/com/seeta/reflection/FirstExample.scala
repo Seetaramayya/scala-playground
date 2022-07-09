@@ -6,10 +6,9 @@ import scala.reflect.runtime.universe._
 
 import scala.reflect.api.Trees
 
-/**
-  * Scala reflection documentation :
-  * https://docs.scala-lang.org/overviews/reflection/symbols-trees-types.html
-  * @author Seeta (Ramayya) Vadali
+/** Scala reflection documentation : https://docs.scala-lang.org/overviews/reflection/symbols-trees-types.html
+  * @author
+  *   Seeta (Ramayya) Vadali
   */
 
 class Sample[T] { def test[U](x: T)(y: U): Int = ??? }

@@ -1,15 +1,12 @@
 package com.seeta.hackerrank.test.algorithms.implementation
 
-/**
-  * ==Problem==
-  * At HackerLand University, a passing grade is any grade 40 points or higher on a 100 point scale.
-  * Sam is a professor at the university and likes to round each student’s grade according to the following rules:
+/** ==Problem==
+  * At HackerLand University, a passing grade is any grade 40 points or higher on a 100 point scale. Sam is a professor
+  * at the university and likes to round each student’s grade according to the following rules:
   *
-  * <ul>
-  *  <li>If the difference between the grade and the next higher multiple of 5 is less than 3,
-  * round to the next higher multiple of 5 </li>
-  *  <li>If the grade is less than 38, don’t bother as it’s still a failing grade
-  * Automate the rounding process then round a list of grades and print the results.</li>
+  * <ul> <li>If the difference between the grade and the next higher multiple of 5 is less than 3, round to the next
+  * higher multiple of 5 </li> <li>If the grade is less than 38, don’t bother as it’s still a failing grade Automate the
+  * rounding process then round a list of grades and print the results.</li>
   *
   * ==Constraints==
   * {{{
@@ -17,8 +14,8 @@ package com.seeta.hackerrank.test.algorithms.implementation
   *   0 <= grade <= 100
   * }}}
   *
-  *
-  * @author Seeta (Ramayya) Vadali
+  * @author
+  *   Seeta (Ramayya) Vadali
   */
 object GradingStudents {
   def gradingRound(grades: Array[Int]): Array[Int] = {
@@ -30,10 +27,10 @@ object GradingStudents {
   }
 
   def main(args: Array[String]) {
-    val sc = new java.util.Scanner (System.in)
-    val n = sc.nextInt()
+    val sc     = new java.util.Scanner(System.in)
+    val n      = sc.nextInt()
     val grades = new Array[Int](n)
-    for(grades_i <- 0 until n) {
+    for (grades_i <- 0 until n) {
       grades(grades_i) = sc.nextInt()
     }
 

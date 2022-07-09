@@ -13,7 +13,7 @@ package com.seeta.hackerrank.test.algorithms.tree
 3. Implement a serializer method
 4. Implement a deserializer method
 
-*/
+ */
 
 case class Node(value: Int, left: Option[Node] = None, right: Option[Node] = None)
 
@@ -23,7 +23,7 @@ object DFS {
     def loop(acc: String, stack: Vector[Node]): String = {
       if (stack.isEmpty) acc
       else {
-        val currentNode = stack.head
+        val currentNode         = stack.head
         val newAccumulatedValue = s"${acc}${currentNode.value}"
         val left = currentNode.left.fold(newAccumulatedValue)(node => loop(newAccumulatedValue, node +: stack.tail))
         currentNode.right.fold(left)(node => loop(left, node +: stack.tail))
@@ -35,10 +35,9 @@ object DFS {
 
   def constructTree(): Unit = ???
 
-
   def main(args: Array[String]) {
-    val left = Some(Node(2, Some(Node(3)), Some(Node(4))))
+    val left  = Some(Node(2, Some(Node(3)), Some(Node(4))))
     val right = Some(Node(5, right = Some(Node(7, Some(Node(8, Some(Node(9))))))))
-    println(dfs(Node(1, left , right)))
+    println(dfs(Node(1, left, right)))
   }
 }
