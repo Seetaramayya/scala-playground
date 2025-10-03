@@ -36,3 +36,6 @@ graph TD;5-->3;
 4-->2;
 ```
 
+### References 
+
+- [Java Virtual Threads](https://blogs.oracle.com/javamagazine/post/java-loom-virtual-threads-platform-threads)
